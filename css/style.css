@@ -1,0 +1,227 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button,
+input[type=submit] {
+  display: inline-block;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
+  display: block;
+}
+
+body {
+  font-family: "Oswald", serif;
+}
+
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.weather {
+  margin-top: 50px;
+  padding: 38px 68px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#6989af), color-stop(#94b1d6), color-stop(#b1cff5), to(#d0e5ff));
+  background: linear-gradient(#6989af, #94b1d6, #b1cff5, #d0e5ff);
+  border-radius: 16px;
+}
+
+.weather-input {
+  font-weight: 400;
+  font-size: 24px;
+  color: #f4f4f4;
+  max-width: 590px;
+  background-color: #f4f4f4;
+  color: rgb(110, 110, 110);
+  font-family: "Oswald", serif;
+  border-radius: 45px;
+  width: 100%;
+  padding: 15px 35px;
+}
+
+.weather-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-column-gap: 45px;
+     -moz-column-gap: 45px;
+          column-gap: 45px;
+}
+
+.weather-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 35px;
+  margin-top: 75px;
+  margin-bottom: 55px;
+}
+.weather-card p {
+  font-family: "Oswald", serif;
+  color: #f4f4f4;
+  font-size: 96px;
+  font-weight: 700;
+  z-index: 2;
+  position: relative;
+  left: -5px;
+}
+.weather-card img {
+  position: relative;
+  left: 32px;
+}
+
+.day {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.day h1 {
+  font-family: "Oswald", serif;
+  color: #f4f4f4;
+  opacity: 0.4;
+  font-size: 48px;
+  text-align: center;
+  font-weight: 700;
+}
+.day p {
+  font-family: "Oswald", serif;
+  color: #f4f4f4;
+  font-size: 48px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.day-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
