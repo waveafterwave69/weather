@@ -58,13 +58,9 @@ async function goRight() {
     const forecast = await data.forecast
     const keys = Object.keys(forecast)
     const forecastArr = forecast[keys[0]]
-    console.log(forecastArr)
-    console.log(dayCount)
     const da = forecastArr[dayCount]
-    console.log(da)
     const day = await da.day
     const temp = await day.avgtemp_c
-    console.log(temp)
     const tempp = document.querySelector('p')
     tempp.textContent = parseInt(temp)
 
@@ -87,6 +83,8 @@ async function goRight() {
     // currDayData.append(dayh1, dayp)
 }
 
+console.log('a')
+
 arrowRight.addEventListener('click', function () {
     goRight()
 })
@@ -102,13 +100,9 @@ async function goLeft() {
     const forecast = await data.forecast
     const keys = Object.keys(forecast)
     const forecastArr = forecast[keys[0]]
-    console.log(forecastArr)
-    console.log(dayCount)
     const da = forecastArr[dayCount]
-    console.log(da)
     const day = await da.day
     const temp = await day.avgtemp_c
-    console.log(temp)
     const tempp = document.querySelector('p')
     tempp.textContent = parseInt(temp)
 
