@@ -6,7 +6,7 @@ const currDayData = document.querySelector('.day-data')
 
 async function checkWeather() {
     const cityName = weatherInputEl.value
-    const apiKey = `http://api.weatherapi.com/v1/current.json?key=d8c6141a21074bfbad0120614252102&q=${cityName}`
+    const apiKey = `https://api.weatherapi.com/v1/current.json?key=d8c6141a21074bfbad0120614252102&q=${cityName}`
     const response = await fetch(apiKey)
     const data = await response.json()
     const current = await data.current
