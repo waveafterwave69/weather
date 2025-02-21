@@ -178,10 +178,9 @@ body {
   font-weight: 700;
   z-index: 2;
   position: relative;
-  left: -5px;
+  left: -40px;
 }
 .weather-card img {
-  position: relative;
   left: 32px;
 }
 
