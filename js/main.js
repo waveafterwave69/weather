@@ -22,19 +22,18 @@ async function checkWeather() {
         const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
         const response = await fetch(weatherApi)
         const data = await response.json()
-
+        console.log(data)
         if (!data.forecast) {
             throw new Error('Неверный ответ от API')
         }
 
-        const forecastArr = data.forecast.forecastday[0]
-        const day = forecastArr.day
-        const temp = day.avgtemp_c
+        const forecastArr = data.current
+        const temp = forecastArr.temp_c
 
-        weatherTitle.textContent = cityName
-        weatherTemp.textContent = Math.round(temp)
+        weatherTitle.textContent = data.location.name
+        weatherTemp.textContent = `${Math.round(temp)}℃`
 
-        dataTitle.textContent = 'СЕГОДНЯ'
+        dataTitle.textContent = 'сегодня'
         const date = new Date()
         const dateDay = date.getDate()
         const dateMouth = date.getMonth() + 1
@@ -72,13 +71,13 @@ seacrchBtn.addEventListener('click', function () {
 weatherInput.addEventListener('keydown', handleEvent)
 
 const arrOfDay = [
-    'СЕГОДНЯ',
-    'ЗАВТРА',
-    'ПОСЛЕЗАВТРА',
-    'ЧЕРЕЗ 2 ДНЯ',
-    'ЧЕРЕЗ 3 ДНЯ',
-    'ЧЕРЕЗ 4 ДНЯ',
-    'ЧЕРЕЗ 5 ДНЯ',
+    'сегодня',
+    'завтра',
+    'послезавтра',
+    'через 2 дня',
+    'через 3 дня',
+    'через 4 дня',
+    'через 5 дня',
 ]
 let dayCount = 0
 let date = new Date()
@@ -96,16 +95,21 @@ async function goRight() {
     } else {
         dataText.textContent = `${dateDay + dayCount}.${dateMouth}.${dateYear}`
     }
-    const cityName = weatherInput.value
+
+    const cityName = weatherTitle.textContent
     const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
     const response = await fetch(weatherApi)
     const data = await response.json()
-
-    const forecastArr = data.forecast.forecastday[dayCount]
-    const day = forecastArr.day
-    const temp = day.avgtemp_c
-
-    weatherTemp.textContent = Math.round(temp)
+    if (dayCount === 0) {
+        const forecastArr = data.current
+        const temp = forecastArr.temp_c
+        weatherTemp.textContent = `${Math.round(temp)}℃`
+    } else {
+        const forecastArr = data.forecast.forecastday[dayCount]
+        const day = forecastArr.day
+        const temp = day.avgtemp_c
+        weatherTemp.textContent = `${Math.round(temp)}℃`
+    }
 }
 
 arrowRight.addEventListener('click', goRight)
@@ -120,16 +124,21 @@ async function goLeft() {
     } else {
         dataText.textContent = `${dateDay + dayCount}.${dateMouth}.${dateYear}`
     }
-    const cityName = weatherInput.value
+    const cityName = weatherTitle.textContent
     const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
     const response = await fetch(weatherApi)
     const data = await response.json()
 
-    const forecastArr = data.forecast.forecastday[dayCount]
-    const day = forecastArr.day
-    const temp = day.avgtemp_c
-
-    weatherTemp.textContent = Math.round(temp)
+    if (dayCount === 0) {
+        const forecastArr = data.current
+        const temp = forecastArr.temp_c
+        weatherTemp.textContent = `${Math.round(temp)}℃`
+    } else {
+        const forecastArr = data.forecast.forecastday[dayCount]
+        const day = forecastArr.day
+        const temp = day.avgtemp_c
+        weatherTemp.textContent = `${Math.round(temp)}℃`
+    }
 }
 
 arrowLeft.addEventListener('click', goLeft)

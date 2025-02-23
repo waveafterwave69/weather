@@ -199,7 +199,8 @@ body {
   font-weight: 700;
   z-index: 2;
   position: relative;
-  left: -40px;
+  left: -45px;
+  font-family: "Inria Sans", serif;
 }
 
 .day {
@@ -220,6 +221,7 @@ body {
   font-size: 48px;
   text-align: center;
   font-weight: 700;
+  font-family: "Play", serif;
 }
 
 .weather-card-text {
@@ -227,6 +229,7 @@ body {
   font-size: 48px;
   text-align: center;
   font-weight: 700;
+  font-family: "Syncopate", serif;
 }
 
 .day-data {
@@ -267,16 +270,14 @@ body {
     font-size: 22px;
   }
   .weather-card-title {
-    font-size: 32px;
+    font-size: 28px;
   }
   .weather-card-text {
-    font-size: 34px;
-    margin-top: -10px;
+    font-size: 30px;
   }
   .weather-temp {
     font-size: 76px;
-    top: 10px;
-    left: -30px;
+    left: -35px;
   }
   .weather-img {
     width: 175px;
