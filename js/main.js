@@ -57,6 +57,7 @@ async function checkWeather() {
 }
 
 function handleEvent(e) {
+    dayCount = 0
     if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
         checkWeather(weatherInput.value.trim())
         weatherInput.value = ''
