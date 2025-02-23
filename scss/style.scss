@@ -202,9 +202,6 @@ body {
     .weather {
         margin-top: 25px;
     }
-}
-
-@media (max-width: 615px) {
     .weather-search {
         padding: 10px 30px;
     }
@@ -234,6 +231,44 @@ body {
     .loading,
     .error {
         font-size: 24px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 550px) {
+    .weather-search {
+        padding: 8px 25px;
+    }
+    .weather-title {
+        font-size: 48px;
+    }
+    .weather-input {
+        font-size: 21px;
+    }
+    .weather-card-title {
+        font-size: 28px;
+    }
+    .weather-card-text {
+        font-size: 28px;
+    }
+    .weather-temp {
+        font-size: 68px;
+        left: -35px;
+    }
+    .weather-card {
+        margin-top: 25px;
+        margin-bottom: 35px;
+    }
+    .weather-img {
+        width: 155px;
+    }
+    .left,
+    .right {
+        width: 35px;
+    }
+    .loading,
+    .error {
+        font-size: 22px;
         margin-top: 10px;
     }
 }

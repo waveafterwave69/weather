@@ -22,7 +22,7 @@ async function checkWeather() {
         const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
         const response = await fetch(weatherApi)
         const data = await response.json()
-        console.log(data)
+
         if (!data.forecast) {
             throw new Error('Неверный ответ от API')
         }
