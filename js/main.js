@@ -10,42 +10,66 @@ const arrowRight = document.querySelector('.right')
 const apiKey = 'd8c6141a21074bfbad0120614252102'
 
 async function checkWeather() {
-    const loading = document.querySelector('.loading')
-    loading.classList.toggle('hidden')
-    document.querySelector('.weather-content').classList.add('hidden')
+    try {
+        const loading = document.querySelector('.loading')
+        const error = document.querySelector('.error')
+        loading.classList.toggle('hidden')
+        error.classList.add('hidden')
+        const weatherContent = document.querySelector('.weather-content')
+        weatherContent.classList.add('hidden')
 
-    const cityName = weatherInput.value
-    const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
-    const response = await fetch(weatherApi)
-    const data = await response.json()
+        const cityName = weatherInput.value.trim()
+        const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
+        const response = await fetch(weatherApi)
+        const data = await response.json()
 
-    const forecastArr = data.forecast.forecastday[0]
-    const day = forecastArr.day
-    const temp = day.avgtemp_c
+        if (!data.forecast) {
+            throw new Error('Неверный ответ от API')
+        }
 
-    weatherTitle.textContent = cityName
-    weatherTemp.textContent = Math.round(temp)
+        const forecastArr = data.forecast.forecastday[0]
+        const day = forecastArr.day
+        const temp = day.avgtemp_c
 
-    dataTitle.textContent = 'СЕГОДНЯ'
-    const date = new Date()
-    const dateDay = date.getDate()
-    const dateMouth = date.getMonth() + 1
-    const dateYear = date.getFullYear()
-    if (dateMouth < 10) {
-        dataText.textContent = `${dateDay}.0${dateMouth}.${dateYear}`
-    } else {
-        dataText.textContent = `${dateDay}.${dateMouth}.${dateYear}`
+        weatherTitle.textContent = cityName
+        weatherTemp.textContent = Math.round(temp)
+
+        dataTitle.textContent = 'СЕГОДНЯ'
+        const date = new Date()
+        const dateDay = date.getDate()
+        const dateMouth = date.getMonth() + 1
+        const dateYear = date.getFullYear()
+        if (dateMouth < 10) {
+            dataText.textContent = `${dateDay}.0${dateMouth}.${dateYear}`
+        } else {
+            dataText.textContent = `${dateDay}.${dateMouth}.${dateYear}`
+        }
+
+        setTimeout(() => {
+            document
+            weatherContent.classList.remove('hidden')
+            loading.classList.add('hidden')
+        }, 1250)
+    } catch (err) {
+        document.querySelector('.error').classList.remove('hidden')
+        document.querySelector('.loading').classList.add('hidden')
+        document.querySelector('.error').textContent = `Ошибка: ${err.message}`
     }
+}
 
-    setTimeout(() => {
-        document.querySelector('.weather-content').classList.remove('hidden')
-        loading.classList.add('hidden')
-    }, 1250)
+function handleEvent(e) {
+    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
+        checkWeather(weatherInput.value.trim())
+        weatherInput.value = ''
+    }
 }
 
 seacrchBtn.addEventListener('click', function () {
     checkWeather()
+    weatherInput.value = ''
 })
+
+weatherInput.addEventListener('keydown', handleEvent)
 
 const arrOfDay = [
     'СЕГОДНЯ',

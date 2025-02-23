@@ -243,7 +243,8 @@ body {
   display: none;
 }
 
-.loading {
+.loading,
+.error {
   color: #f4f4f4;
   font-size: 32px;
   margin-top: 20px;
@@ -284,7 +285,8 @@ body {
   .right {
     width: 38px;
   }
-  .loading {
+  .loading,
+  .error {
     font-size: 24px;
     margin-top: 10px;
   }
