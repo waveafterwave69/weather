@@ -64,6 +64,7 @@ function handleEvent(e) {
 }
 
 seacrchBtn.addEventListener('click', function () {
+    dayCount = 0
     checkWeather()
     weatherInput.value = ''
 })
