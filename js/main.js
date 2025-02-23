@@ -10,6 +10,10 @@ const arrowRight = document.querySelector('.right')
 const apiKey = 'd8c6141a21074bfbad0120614252102'
 
 async function checkWeather() {
+    const loading = document.querySelector('.loading')
+    loading.classList.toggle('hidden')
+    document.querySelector('.weather-content').classList.add('hidden')
+
     const cityName = weatherInput.value
     const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
     const response = await fetch(weatherApi)
@@ -22,8 +26,6 @@ async function checkWeather() {
     weatherTitle.textContent = cityName
     weatherTemp.textContent = Math.round(temp)
 
-    document.querySelector('.weather-content').classList.remove('hidden')
-
     dataTitle.textContent = 'СЕГОДНЯ'
     const date = new Date()
     const dateDay = date.getDate()
@@ -34,6 +36,11 @@ async function checkWeather() {
     } else {
         dataText.textContent = `${dateDay}.${dateMouth}.${dateYear}`
     }
+
+    setTimeout(() => {
+        document.querySelector('.weather-content').classList.remove('hidden')
+        loading.classList.add('hidden')
+    }, 1250)
 }
 
 seacrchBtn.addEventListener('click', function () {

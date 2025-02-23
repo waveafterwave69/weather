@@ -243,6 +243,13 @@ body {
   display: none;
 }
 
+.loading {
+  color: #f4f4f4;
+  font-size: 32px;
+  margin-top: 20px;
+  text-align: center;
+}
+
 @media (max-width: 850px) {
   .weather {
     margin-top: 25px;
@@ -276,5 +283,9 @@ body {
   .left,
   .right {
     width: 38px;
+  }
+  .loading {
+    font-size: 24px;
+    margin-top: 10px;
   }
 }
