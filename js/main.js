@@ -1,274 +1,104 @@
-const weatherInputEl = document.querySelector('.weather-input')
-const seacrchBtnel = document.querySelector('.weather-search-btn')
-const weatherCardEl = document.querySelector('.weather-card')
-const dayData = document.querySelector('.day')
-const currDayData = document.querySelector('.day-data')
+const weatherInput = document.querySelector('.weather-input')
+const seacrchBtn = document.querySelector('.weather-search-btn')
+const weatherTemp = document.querySelector('.weather-temp')
+const weatherTitle = document.querySelector('.weather-title')
+const weatherImg = document.querySelector('.weather-img')
+const dataTitle = document.querySelector('.weather-card-title')
+const dataText = document.querySelector('.weather-card-text')
 const arrowLeft = document.querySelector('.left')
 const arrowRight = document.querySelector('.right')
-let dayCount = 0
+const apiKey = 'd8c6141a21074bfbad0120614252102'
 
 async function checkWeather() {
-    const cityName = weatherInputEl.value
-    const apiKey = `https://api.weatherapi.com/v1/forecast.json?key=d8c6141a21074bfbad0120614252102&q=${cityName}&days=7`
-    const response = await fetch(apiKey)
+    const cityName = weatherInput.value
+    const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
+    const response = await fetch(weatherApi)
     const data = await response.json()
-    const forecast = await data.forecast
-    const keys = Object.keys(forecast)
-    const forecastArr = forecast[keys[0]]
-    const da = forecastArr[0]
-    const day = await da.day
-    const temp = await day.avgtemp_c
 
-    weatherCardEl.classList.remove('hidden')
-    const tempp = document.createElement('p')
-    tempp.textContent = parseInt(temp)
-    const tempimg = document.createElement('img')
-    tempimg.src = './img/sun.png'
-    weatherCardEl.append(tempimg, tempp)
+    const forecastArr = data.forecast.forecastday[0]
+    const day = forecastArr.day
+    const temp = day.avgtemp_c
 
-    dayData.classList.remove('hidden')
-    const dayh1 = document.createElement('h1')
-    const dayp = document.createElement('p')
-    dayh1.textContent = 'СЕГОДНЯ'
-    const currDataData = new Date()
-    if (currDataData.getDay() < 10) {
-        dayp.textContent = `${currDataData.getDate()}.0${currDataData.getDay()}.${currDataData.getFullYear()}`
+    weatherTitle.textContent = cityName
+    weatherTemp.textContent = Math.round(temp)
+
+    document.querySelector('.weather-content').classList.remove('hidden')
+
+    dataTitle.textContent = 'СЕГОДНЯ'
+    const date = new Date()
+    const dateDay = date.getDate()
+    const dateMouth = date.getMonth() + 1
+    const dateYear = date.getFullYear()
+    if (dateMouth < 10) {
+        dataText.textContent = `${dateDay}.0${dateMouth}.${dateYear}`
     } else {
-        dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
+        dataText.textContent = `${dateDay}.${dateMouth}.${dateYear}`
     }
-
-    currDayData.append(dayh1, dayp)
 }
 
-seacrchBtnel.addEventListener('click', function () {
-    weatherCardEl.innerHTML = ''
-    currDayData.innerHTML = ''
-    dayCount = 0
+seacrchBtn.addEventListener('click', function () {
     checkWeather()
 })
+
+const arrOfDay = [
+    'СЕГОДНЯ',
+    'ЗАВТРА',
+    'ПОСЛЕЗАВТРА',
+    'ЧЕРЕЗ 2 ДНЯ',
+    'ЧЕРЕЗ 3 ДНЯ',
+    'ЧЕРЕЗ 4 ДНЯ',
+    'ЧЕРЕЗ 5 ДНЯ',
+]
+let dayCount = 0
+let date = new Date()
+let dateDay = date.getDate()
+let dateMouth = date.getMonth() + 1
+let dateYear = date.getFullYear()
 
 async function goRight() {
     if (dayCount < 6) {
         dayCount++
     }
-    if (dayCount === 1) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЗАВТРА'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 1
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-
-        currDayData.append(dayh1, dayp)
-    } else if (dayCount === 2) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ПОСЛЕЗАВТРА'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 2
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 3) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 2 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 3
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 4) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 3 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 4
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 5) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 4 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 5
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 6) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 5 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 6
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
+    dataTitle.textContent = arrOfDay[dayCount]
+    if (dateMouth < 10) {
+        dataText.textContent = `${dateDay + dayCount}.0${dateMouth}.${dateYear}`
+    } else {
+        dataText.textContent = `${dateDay + dayCount}.${dateMouth}.${dateYear}`
     }
-    const cityName = weatherInputEl.value
-    const apiKey = `https://api.weatherapi.com/v1/forecast.json?key=d8c6141a21074bfbad0120614252102&q=${cityName}&days=7`
-    const response = await fetch(apiKey)
+    const cityName = weatherInput.value
+    const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
+    const response = await fetch(weatherApi)
     const data = await response.json()
-    const forecast = await data.forecast
-    const keys = Object.keys(forecast)
-    const forecastArr = forecast[keys[0]]
-    const da = forecastArr[dayCount]
-    const day = await da.day
-    const temp = await day.avgtemp_c
-    const tempp = document.querySelector('p')
-    tempp.textContent = parseInt(temp)
+
+    const forecastArr = data.forecast.forecastday[dayCount]
+    const day = forecastArr.day
+    const temp = day.avgtemp_c
+
+    weatherTemp.textContent = Math.round(temp)
 }
 
-console.log('a')
-
-arrowRight.addEventListener('click', function () {
-    goRight()
-})
+arrowRight.addEventListener('click', goRight)
 
 async function goLeft() {
     if (dayCount > 0) {
         dayCount--
     }
-    if (dayCount === 0) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'СЕГОДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${currDataData.getDate()}.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-
-        currDayData.append(dayh1, dayp)
-    } else if (dayCount === 1) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЗАВТРА'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 1
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-
-        currDayData.append(dayh1, dayp)
-    } else if (dayCount === 2) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ПОСЛЕЗАВТРА'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 2
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 3) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 2 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 3
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 4) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 3 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 4
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 5) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 4 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 5
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
-    } else if (dayCount === 6) {
-        const dayh1 = document.querySelector('h1')
-        const dayp = document.querySelectorAll('p')[1]
-        dayh1.textContent = 'ЧЕРЕЗ 5 ДНЯ'
-        const currDataData = new Date()
-        if (currDataData.getDay() < 10) {
-            dayp.textContent = `${
-                currDataData.getDate() + 6
-            }.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-        } else {
-            dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-        }
+    dataTitle.textContent = arrOfDay[dayCount]
+    if (dateMouth < 10) {
+        dataText.textContent = `${dateDay + dayCount}.0${dateMouth}.${dateYear}`
+    } else {
+        dataText.textContent = `${dateDay + dayCount}.${dateMouth}.${dateYear}`
     }
-    const cityName = weatherInputEl.value
-    const apiKey = `https://api.weatherapi.com/v1/forecast.json?key=d8c6141a21074bfbad0120614252102&q=${cityName}&days=7`
-    const response = await fetch(apiKey)
+    const cityName = weatherInput.value
+    const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
+    const response = await fetch(weatherApi)
     const data = await response.json()
-    const forecast = await data.forecast
-    const keys = Object.keys(forecast)
-    const forecastArr = forecast[keys[0]]
-    const da = forecastArr[dayCount]
-    const day = await da.day
-    const temp = await day.avgtemp_c
-    const tempp = document.querySelector('p')
-    tempp.textContent = parseInt(temp)
 
-    // tempp.textContent = temp
-    // const tempimg = document.createElement('img')
-    // tempimg.src = './img/sun.png'
-    // weatherCardEl.append(tempimg, tempp)
+    const forecastArr = data.forecast.forecastday[dayCount]
+    const day = forecastArr.day
+    const temp = day.avgtemp_c
 
-    // dayData.classList.remove('hidden')
-    // const dayh1 = document.createElement('h1')
-    // const dayp = document.createElement('p')
-    // dayh1.textContent = 'СЕГОДНЯ'
-    // const currDataData = new Date()
-    // if (currDataData.getDay() < 10) {
-    //     dayp.textContent = `${currDataData.getDate()}.0${currDataData.getDay()}.${currDataData.getFullYear()}`
-    // } else {
-    //     dayp.textContent = `${currDataData.getDate()}.${currDataData.getDay()}.${currDataData.getFullYear()}`
-    // }
-
-    // currDayData.append(dayh1, dayp)
+    weatherTemp.textContent = Math.round(temp)
 }
 
-arrowLeft.addEventListener('click', function () {
-    goLeft()
-})
+arrowLeft.addEventListener('click', goLeft)

@@ -96,38 +96,44 @@ legend {
 
 body {
     font-family: 'Oswald', serif;
+    background: linear-gradient(#366785, #98d8ff);
 }
 
 .container {
-    max-width: 750px;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 30px;
 }
 
 .weather {
     margin-top: 50px;
-    padding: 38px 68px;
-    background: linear-gradient(#6989af, #94b1d6, #b1cff5, #d0e5ff);
-    border-radius: 16px;
 }
 
 .weather-input {
     font-weight: 400;
     font-size: 24px;
     color: #f4f4f4;
-    max-width: 590px;
-    background-color: #f4f4f4;
-    color: rgb(110, 110, 110);
-    font-family: 'Oswald', serif;
-    border-radius: 45px;
     width: 100%;
-    padding: 15px 35px;
+    &::placeholder {
+        color: #d3d3d3;
+    }
+}
+
+.weather-title {
+    font-size: 86px;
+    color: #ffffff;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 25px;
 }
 
 .weather-search {
+    padding: 15px 39px;
+    background-color: #f4f4f460;
     display: flex;
     justify-content: center;
-    column-gap: 45px;
+    border-radius: 35px;
+    column-gap: 39px;
 }
 
 .weather-card {
@@ -135,43 +141,41 @@ body {
     align-items: flex-end;
     justify-content: center;
     margin-bottom: 35px;
-    margin-top: 75px;
-    & p {
-        font-family: 'Oswald', serif;
-        color: #f4f4f4;
-        font-size: 96px;
-        font-weight: 700;
-        z-index: 2;
-        position: relative;
-        left: -40px;
-    }
+    margin-top: 35px;
     & img {
-        // position: relative;
         left: 32px;
     }
     margin-bottom: 55px;
+}
+
+.weather-temp {
+    color: #f4f4f4;
+    font-size: 96px;
+    font-weight: 700;
+    z-index: 2;
+    position: relative;
+    left: -40px;
 }
 
 .day {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
 
-    & h1 {
-        font-family: 'Oswald', serif;
-        color: #f4f4f4;
-        opacity: 0.4;
-        font-size: 48px;
-        text-align: center;
-        font-weight: 700;
-    }
-    & p {
-        font-family: 'Oswald', serif;
-        color: #f4f4f4;
-        font-size: 48px;
-        text-align: center;
-        font-weight: 700;
-    }
+.weather-card-title {
+    color: #f4f4f4;
+    opacity: 0.4;
+    font-size: 48px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.weather-card-text {
+    color: #f4f4f4;
+    font-size: 48px;
+    text-align: center;
+    font-weight: 700;
 }
 
 .day-data {
@@ -181,4 +185,41 @@ body {
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 850px) {
+    .weather {
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 615px) {
+    .weather-search {
+        padding: 10px 30px;
+    }
+    .weather-title {
+        font-size: 64px;
+    }
+    .weather-input {
+        font-size: 22px;
+    }
+    .weather-card-title {
+        font-size: 32px;
+    }
+    .weather-card-text {
+        font-size: 34px;
+        margin-top: -10px;
+    }
+    .weather-temp {
+        font-size: 76px;
+        top: 10px;
+        left: -30px;
+    }
+    .weather-img {
+        width: 175px;
+    }
+    .left,
+    .right {
+        width: 38px;
+    }
 }
