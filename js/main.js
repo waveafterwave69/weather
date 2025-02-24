@@ -30,15 +30,15 @@ let days = [
 ]
 
 // ПОИСК ПОГОДЫ ПО ГОРОДУ
-async function checkWeather() {
+async function checkWeather(query) {
     try {
         loading.classList.toggle('hidden')
         error.classList.add('hidden')
         weatherContent.classList.add('hidden')
 
-        const cityName = weatherInput.value.trim()
+        // const cityName =
 
-        const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=7`
+        const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${query}&days=7`
         const response = await fetch(weatherApi)
         const data = await response.json()
         console.log(data)
@@ -89,7 +89,7 @@ function handleEvent(e) {
 
 seacrchBtn.addEventListener('click', function () {
     dayCount = 0
-    checkWeather()
+    checkWeather(weatherInput.value.trim())
     weatherInput.value = ''
 })
 
@@ -167,3 +167,21 @@ async function goLeft() {
 }
 
 arrowLeft.addEventListener('click', goLeft)
+
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords
+                checkWeather(`${latitude},${longitude}`) // Передаём координаты в API
+            },
+            (error) => {
+                // return
+            }
+        )
+    } else {
+        // return
+    }
+}
+
+document.addEventListener('DOMContentLoaded', getUserLocation)
