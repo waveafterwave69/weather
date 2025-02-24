@@ -97,7 +97,10 @@ legend {
 body {
     font-family: 'Oswald', serif;
     background: linear-gradient(#366785, #98d8ff);
-    // background: linear-gradient(#1a1f22, #284b61);
+}
+
+.body-black-theme {
+    background: linear-gradient(#232a2e, #284b61);
 }
 
 .container {

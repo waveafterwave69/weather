@@ -120,6 +120,11 @@ body {
   background: linear-gradient(#366785, #98d8ff);
 }
 
+.body-black-theme {
+  background: -webkit-gradient(linear, left top, left bottom, from(#232a2e), to(#284b61));
+  background: linear-gradient(#232a2e, #284b61);
+}
+
 .container {
   max-width: 780px;
   margin: 0 auto;

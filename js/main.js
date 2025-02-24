@@ -41,7 +41,7 @@ async function checkWeather(query) {
         const weatherApi = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${query}&days=7`
         const response = await fetch(weatherApi)
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
 
         if (!data.forecast) {
             throw new Error('Неверный ответ от API')
@@ -49,6 +49,12 @@ async function checkWeather(query) {
 
         const currentArr = data.current
         const temp = currentArr.temp_c
+
+        // ДЕНЬ ИЛИ НОЧЬ
+        const isDay = currentArr.is_day
+        if (!isDay) {
+            document.body.classList.add('body-black-theme')
+        }
 
         weatherTitle.textContent = data.location.name
         weatherTemp.textContent = `${Math.round(temp)}℃`
