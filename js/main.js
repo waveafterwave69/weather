@@ -54,6 +54,8 @@ async function checkWeather(query) {
         const isDay = currentArr.is_day
         if (!isDay) {
             document.body.classList.add('body-black-theme')
+        } else {
+            document.body.classList.remove('body-black-theme')
         }
 
         weatherTitle.textContent = data.location.name
